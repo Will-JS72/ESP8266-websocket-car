@@ -1,0 +1,89 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<style>
+    body {
+        margin-top: 100px;
+        border: 3px;
+    }
+    .myrow{
+        height: 45px;
+    }
+    button{
+      width:100%;
+    }
+    .slider{
+      width:100%;
+    }
+   
+</style>
+</head>
+
+<body onload="javascript:mc_init()">
+    <div class="container">
+        <div class="row justify-content-center align-items-center myrow">
+            <div class="col-md-4 col-sm-6 col-6 mycol">
+            <input type="range" min="0" max="100" value="50" class="slider" id="speedBar" oninput="setSpeed()" />
+            </div>
+            <div class="col-md-3 col-sm-4 col-4 mycol">
+              <label style="text:center" for="speedBar" id="speedLabel">Speed: 50%</label>
+            </div>
+        </div>
+
+        <div class="row justify-content-center align-items-center myrow">
+            <div class="col-md-4 col-6 mycol">
+                <button class="btn btn-outline-secondary" id="forward">FORWARD</button>  
+            </div>
+        </div>
+
+        <div class="row justify-content-around align-items-center myrow">
+            <div class="col-md-4  col-5 mycol">
+                <button class="btn btn-outline-secondary" id="LFT">LEFT</button>
+            </div>
+            <div class="col-md-4  col-5 mycol">
+              <button class="btn btn-outline-secondary" id="RGT">RIGHT</button>
+            </div>
+
+        </div>
+
+        <div class="row justify-content-center  align-items-center myrow">
+            <div class="col-md-4 col-6 mycol">
+                <button class="btn btn-outline-secondary" id="BWD">REVERSE</button>
+            </div>
+        </div>
+    </div>
+<script>
+  
+	var socket, speed=50;
+  function mc_init() {
+    // Initialiaze the websocket client
+		socket = new WebSocket('ws://' + window.location.hostname + ':81/');
+    var buttons = document.getElementsByTagName('button');
+    for(i=0;i<buttons.length;i++) {
+      buttons[i].addEventListener('mousedown',move,true);
+      buttons[i].addEventListener('mouseup',stop,true);
+      buttons[i].addEventListener('touchstart',move,true);
+      buttons[i].addEventListener('touchend',stop,true);
+    }
+  }
+  function setSpeed() {
+    speed = document.getElementById("speedBar").value;
+    speed = parseInt(speed).toFixed(0);
+    document.getElementById("speedLabel").innerHTML = "Speed: " + speed + "%";
+    return false;
+  }
+  function move(e) {
+    e.preventDefault(); // prevent hold to copy-paste menu pop-up on mobile!
+    var data = {'direction':e.srcElement.id,'speed':speed};
+	  socket.send(JSON. stringify(data));
+    return false;
+  }
+  function stop() {
+    var data = {'direction':'STP'};
+	  socket.send(JSON. stringify(data));
+    return false;
+  }
+</script>
+</body>
+</html>
