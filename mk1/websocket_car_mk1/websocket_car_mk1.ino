@@ -33,10 +33,8 @@ int pos = 90;
 
 ESP8266WebServer server;
 //change these for your own network credentials
-//char* ssid = "INSERTSSID";
-char* ssid = "Phone";
-//char* password = "YOURWPANPASSWORD";
-char* password = "bobbobbob";
+char* ssid = "INSERTSSID";
+char* password = "YOURWPANPASSWORD";
 
 // hold uploaded file
 File fsUploadFile;
