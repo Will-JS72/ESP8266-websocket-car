@@ -1,0 +1,22 @@
+1.Overview:
+This version uses the Node MCU 1.0 ESP8266 module with the "websocket_car_mk1.ino" sketch and the "index.html" loaded into SPIFFS flash memory see instructions on how to do this in the arduino IDE.
+The other components used were the L298N H-Bridge module, one SG90 micro servo motor, 2 geared 6V DC motors with wheels.
+The mechanical chassis was constructed from technical lego. I made use of several methods of bracing the non lego components while also cradling them and restricting them in all their degrees of freedom.
+Although the H bridge and the developement board sat on flat plated area on top of the chassis.
+
+2.LEGO mechanical structure:
+The steering was comprised of the servo suspended over two sets of double pegs that are each positioned along a long beam also susspended from two points under the servo. from these two long beams the wheel/stilt beams are fitted.
+see readme images for reference.
+
+
+
+
+3.The web connection:
+The ESP8266 uses your network credentials to connect to a given network and from there hosts the "index.HTML" page from a port on that network.
+You can then visit the webpage by entering the ports ip address into your browser as long as you are connected to the same network.
+The "Index.HTML" page uses a webocket to establish a connection between the active webpage and the sketch running on the developement board.
+For more information on websockets and their uses visit ACROBOTIC on youtube, this is where I looked when researching the methods needed for this project.
+The website is formated using a bootstrap grid, this makes layout very easy, and essentialy works by applying very personalisable css rules to html objects using only their class names.
+This is possible because of the large set of conditional and combinational rules in the bootstrap css.
+To save on file space as i knew this had to be loaded into the boards flash memory I decided to use a bootstrap CDN link to tell the page to go and fetch a nother stylesheet from a bootstrapCDN server when the page loads up.
+These links are available from the getbootstrap.com website.
