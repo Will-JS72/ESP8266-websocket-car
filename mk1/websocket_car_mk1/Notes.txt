@@ -20,3 +20,8 @@ The website is formated using a bootstrap grid, this makes layout very easy, and
 This is possible because of the large set of conditional and combinational rules in the bootstrap css.
 To save on file space as i knew this had to be loaded into the boards flash memory I decided to use a bootstrap CDN link to tell the page to go and fetch a nother stylesheet from a bootstrapCDN server when the page loads up.
 These links are available from the getbootstrap.com website.
+
+4.instructions:
+To load the index.HTML file into SPIFFS first modify the arduino ide, go to github ESP8266/arduino/doc/filesystem and follow the instructions on how to modify the environment.
+Next you have to have a folder named data in the same directory as the sketch you are editing in arduino,the contents of this folder will be loaded into flash.
+finally go to tools in the arduino ide and select the "ESP8266 sketch data upload", and your data file will be copied to flash memory.
